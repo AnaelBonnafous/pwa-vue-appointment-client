@@ -12,6 +12,7 @@ const router = useRouter();
 
       <v-btn @click="router.push('/')" variant="flat">Home</v-btn>
       <v-btn @click="router.push('/login')" variant="flat">Login</v-btn>
+      <v-btn @click="router.push('/register')" variant="flat">Register</v-btn>
     </v-app-bar>
 
     <v-main>
