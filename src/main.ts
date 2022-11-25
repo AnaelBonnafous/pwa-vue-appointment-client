@@ -14,8 +14,8 @@ const app = createApp(App);
 app.use(router);
 app.use(vuetify);
 app.use(VueFire, {
-  firebase: firebaseApp,
-  // modules: [VueFireAuth()],
+  firebaseApp,
+  modules: [VueFireAuth()],
 });
 
 app.mount("#app");
