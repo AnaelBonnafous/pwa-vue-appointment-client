@@ -5,8 +5,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "@firebase/auth";
+import { addDoc, collection } from "@firebase/firestore";
 import { updateCurrentUserProfile } from "vuefire";
-import { auth } from "@/plugins/firebase";
+import { auth, firestore } from "@/plugins/firebase";
 
 const form = reactive({
   firstname: "",
@@ -17,7 +18,17 @@ const form = reactive({
 
 const register = async () => {
   try {
-    await createUserWithEmailAndPassword(auth, form.email, form.password);
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      form.email,
+      form.password
+    );
+
+    await addDoc(collection(firestore, "client"), {
+      uid: user.uid,
+      firstname: form.firstname,
+      lastname: form.lastname,
+    });
 
     await signInWithEmailAndPassword(auth, form.email, form.password);
 
