@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 
 import {
   createUserWithEmailAndPassword,
@@ -8,6 +9,8 @@ import {
 import { addDoc, collection } from "@firebase/firestore";
 import { updateCurrentUserProfile } from "vuefire";
 import { auth, firestore } from "@/plugins/firebase";
+
+const router = useRouter();
 
 const form = reactive({
   firstname: "",
@@ -35,6 +38,8 @@ const register = async () => {
     await updateCurrentUserProfile({
       displayName: `${form.firstname} ${form.lastname}`,
     });
+
+    router.push({ name: "Dashboard" });
   } catch (error) {
     //
   }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { auth } from "@/plugins/firebase";
+
+const router = useRouter();
 
 const form = reactive({
   email: "",
@@ -12,6 +15,8 @@ const form = reactive({
 const login = async () => {
   try {
     await signInWithEmailAndPassword(auth, form.email, form.password);
+    
+    router.push({ name: "Dashboard" });
   } catch (error) {
     //
   }

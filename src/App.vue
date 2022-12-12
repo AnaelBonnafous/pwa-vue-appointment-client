@@ -11,6 +11,7 @@ const user = useCurrentUser();
 
 const logout = async () => {
   await signOut(auth);
+  router.push({ name: "Login" });
 };
 </script>
 
