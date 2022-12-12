@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "@/plugins/firebase";
+
 const form = reactive({
   email: "",
   password: "",
 });
+
+const login = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, form.email, form.password);
+  } catch (error) {
+    //
+  }
+};
 </script>
 
 <template>
   <h1>Login</h1>
-  <v-form>
+  <v-form @submit.prevent="login">
     <v-text-field
       v-model="form.email"
       type="email"
@@ -20,6 +31,6 @@ const form = reactive({
       type="password"
       placeholder="******"
     />
-    <v-btn block>submit</v-btn>
+    <v-btn type="submit" block>submit</v-btn>
   </v-form>
 </template>
