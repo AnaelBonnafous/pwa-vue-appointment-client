@@ -27,6 +27,7 @@ const logout = async () => {
 
       <template v-if="user">
         {{ user.displayName }}
+        <v-btn @click="router.push('/dashboard')" variant="flat">Dashboard</v-btn>
         <v-btn @click="logout" variant="flat">Logout</v-btn>
       </template>
       <template v-else>
