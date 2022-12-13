@@ -20,20 +20,30 @@ const logout = async () => {
     <v-app-bar>
       <v-app-bar-title>Appointment client</v-app-bar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn @click="router.push('/')" variant="flat">Home</v-btn>
-
-      <v-spacer></v-spacer>
-
       <template v-if="user">
-        {{ user.displayName }}
-        <v-btn @click="router.push('/dashboard')" variant="flat">Dashboard</v-btn>
-        <v-btn @click="logout" variant="flat">Logout</v-btn>
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn color="primary" v-bind="props">
+              {{ user.displayName }}
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="logout">
+              <template v-slot:prepend>
+                <v-icon icon="mdi-logout" />
+              </template>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </template>
       <template v-else>
-        <v-btn @click="router.push('/login')" variant="flat">Login</v-btn>
-        <v-btn @click="router.push('/register')" variant="flat">Register</v-btn>
+        <v-btn @click="router.push({ name: 'Login' })" variant="flat"
+          >Login</v-btn
+        >
+        <v-btn @click="router.push({ name: 'Register' })" variant="flat"
+          >Register</v-btn
+        >
       </template>
     </v-app-bar>
 
@@ -42,5 +52,20 @@ const logout = async () => {
         <router-view />
       </v-container>
     </v-main>
+
+    <v-bottom-navigation>
+      <v-btn @click="router.push({ name: 'Home' })">
+        <v-icon icon="mdi-home" />
+        Home
+      </v-btn>
+      <v-btn @click="router.push({ name: 'Dashboard' })">
+        <v-icon icon="mdi-notebook" />
+        Appointments
+      </v-btn>
+      <v-btn>
+        <v-icon icon="mdi-map-marker" />
+        Map
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
