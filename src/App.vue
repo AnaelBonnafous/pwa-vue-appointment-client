@@ -62,7 +62,7 @@ const logout = async () => {
         <v-icon icon="mdi-notebook" />
         Appointments
       </v-btn>
-      <v-btn>
+      <v-btn @click="router.push({ name: 'Map' })">
         <v-icon icon="mdi-map-marker" />
         Map
       </v-btn>

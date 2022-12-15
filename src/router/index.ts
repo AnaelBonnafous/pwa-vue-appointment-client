@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Map from "../views/Map.vue";
 
 const routes = [
   {
@@ -26,6 +27,14 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/map",
+    name: "Map",
+    component: Map,
     meta: {
       requiresAuth: true,
     },
